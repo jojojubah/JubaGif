@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob: file:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';">
+  <title>JubaGif — YouTube Downloader + GIF Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <div class="logo">
+      <div class="logo-icon">
+        <img src="app-logo.png" width="32" height="32" alt="JubaGif Logo" />
+      </div>
+      <span class="logo-text">JubaGif</span>
+    </div>
+
+    <nav>
+      <button class="menu-item active" id="tab-downloader" data-tab="downloader">
+        <svg class="tab-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+        Downloader
+      </button>
+      <button class="menu-item" id="tab-video-tools" data-tab="video-tools">
+        <svg class="tab-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M8 5v14l11-7z"/>
+        </svg>
+        Video Tools
+      </button>
+      <button class="menu-item" id="tab-image-tools" data-tab="image-tools">
+        <svg class="tab-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+        </svg>
+        Image Tools
+      </button>
+      <button class="menu-item" id="tab-watermark" data-tab="watermark">
+        <svg class="tab-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M19,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M19,19H5V5H19V19M13.96,12.29L11.21,15.83L9.25,13.47L6.5,17H17.5L13.96,12.29Z"/>
+        </svg>
+        Watermark
+      </button>
+    </nav>
+
+    <div class="bottom-menu">
+      <button class="menu-item" id="tab-customization" data-tab="customization">
+        <svg class="tab-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+        </svg>
+        Customization
+      </button>
+    </div>
+  </div>
+
+  <div class="main">
+
+  <section id="downloader" class="view active">
+    <div class="tool-section">
+      <h3 class="section-title">
+        <svg class="section-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+        YouTube Downloader
+      </h3>
+      <div class="input-preview-container">
+      <div class="input-section">
+        <div class="url-input-row">
+          <div class="input-with-clear">
+            <input id="yt-url" type="text" placeholder="Paste YouTube URL" />
+            <button id="btn-clear-url" type="button" class="clear-btn" style="display: none;">
+              <svg viewBox="0 0 24 24">
+                <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+              </svg>
+            </button>
+          </div>
+          <button id="btn-paste" type="button">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+              <path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"/>
+            </svg>
+            Paste
+          </button>
+        </div>
+        <div class="download-container">
+          <button id="btn-fetch-info" type="button">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            Fetch Info
+          </button>
+          <div class="circuit-loader" id="fetch-spinner">
+            <div class="circuit"></div>
+          </div>
+        </div>
+      </div>
+      <div class="preview-section" id="dl-preview" style="display: none;">
+        <img id="dl-thumbnail" alt="Video thumbnail" />
+        <div class="preview-info">
+          <div id="dl-title"></div>
+          <div id="dl-duration"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <label>Format:</label>
+      <select id="dl-format">
+        <option value="mp4">MP4</option>
+        <option value="webm">WEBM</option>
+        <option value="mov">MOV</option>
+        <option value="mp3">MP3 (audio)</option>
+      </select>
+      <label>Quality:</label>
+      <select id="dl-quality">
+        <!-- Options populated dynamically by JavaScript -->
+      </select>
+    </div>
+    <div class="row">
+      <label>Output folder:</label>
+      <input id="dl-outdir" type="text" placeholder="Select download destination" readonly />
+      <button id="btn-browse-dl-folder" type="button">
+        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+          <path fill="currentColor" d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+        </svg>
+        Browse
+      </button>
+    </div>
+    <div class="download-container">
+      <button id="btn-download">
+        <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18">
+          <path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+        Download
+      </button>
+      <div class="circuit-loader" id="download-spinner">
+        <div class="circuit"></div>
+      </div>
+    </div>
+    <progress id="dl-progress" max="100" value="0"></progress>
+    <pre id="dl-log"></pre>
+    </div>
+  </section>
+
+  <section id="video-tools" class="view">
+      <div class="tool-section">
+        <h3 class="section-title">
+          <svg class="section-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M8 5v14l11-7z"/>
+          </svg>
+          Video Tools
+        </h3>
+        <div class="file-preview-container">
+          <div class="file-upload-area" onclick="document.getElementById('cv-file').click()">
+            <div class="upload-icon">🎬</div>
+            <div class="upload-text">
+              <strong>Choose a video file or drag and drop here</strong><br>
+              <small>Supports MP4, AVI, MOV, MKV and more • or click to choose file</small>
+            </div>
+            <input id="cv-file" type="file" accept="video/*" style="display: none;" />
+          </div>
+          <div class="preview-section" id="cv-preview" style="display: none;">
+            <img id="cv-thumbnail" alt="Video preview" />
+            <div class="preview-info">
+              <div id="cv-filename"></div>
+              <div id="cv-resolution"></div>
+              <div id="cv-duration"></div>
+              <div id="cv-filesize"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label>Start (ss):</label><input id="cv-ss" type="text" placeholder="00:00:00" />
+          <label>End (to):</label><input id="cv-to" type="text" placeholder="00:00:05" />
+        </div>
+        <div class="row">
+          <label>FPS:</label><input id="cv-fps" type="number" value="15" />
+          <label>Width:</label><input id="cv-width" type="number" value="480" />
+        </div>
+        <div class="row">
+          <label>Output folder:</label>
+          <input id="cv-outdir" type="text" placeholder="Select destination folder" readonly />
+          <button id="btn-browse-folder" type="button">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+              <path fill="currentColor" d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+            </svg>
+            Browse
+          </button>
+        </div>
+        <div class="row">
+          <label>Output name (no ext):</label><input id="cv-out" type="text" placeholder="output" />
+          <label>Format:</label>
+          <select id="cv-format">
+            <option value="gif">GIF (HQ palette)</option>
+            <option value="mp4">MP4</option>
+            <option value="webm">WebM</option>
+          </select>
+        </div>
+
+        <h4 class="effects-title">Video Effects</h4>
+        <div class="row">
+          <label>Speed:</label>
+          <select id="vid-speed">
+            <option value="1" selected>Normal (1x)</option>
+            <option value="0.25">Very Slow (0.25x)</option>
+            <option value="0.5">Slow (0.5x)</option>
+            <option value="2">Fast (2x)</option>
+            <option value="4">Very Fast (4x)</option>
+          </select>
+
+          <label>Reverse:</label>
+          <input type="checkbox" id="vid-reverse">
+        </div>
+        <div class="row">
+          <label>Mirror:</label>
+          <select id="vid-mirror">
+            <option value="none" selected>None</option>
+            <option value="hflip">Horizontal</option>
+            <option value="vflip">Vertical</option>
+          </select>
+
+          <label>Rotate:</label>
+          <select id="vid-rotate">
+            <option value="0" selected>None</option>
+            <option value="90">90°</option>
+            <option value="180">180°</option>
+            <option value="270">270°</option>
+          </select>
+        </div>
+
+        <div class="download-container">
+          <button id="btn-convert">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            Convert Video
+          </button>
+          <div class="circuit-loader" id="convert-spinner">
+            <div class="circuit"></div>
+          </div>
+        </div>
+        <pre id="cv-log"></pre>
+      </div>
+  </section>
+
+  <section id="image-tools" class="view">
+      <div class="tool-section">
+        <h3 class="section-title">
+          <svg class="section-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+          </svg>
+          Image Tools
+        </h3>
+        <div class="file-preview-container">
+          <div class="file-upload-area" onclick="document.getElementById('img-file').click()">
+            <div class="upload-icon">🖼️</div>
+            <div class="upload-text">
+              <strong>Choose an image file or drag and drop here</strong><br>
+              <small>Supports JPG, PNG, BMP, WebP and more • or click to choose file</small>
+            </div>
+            <input id="img-file" type="file" accept="image/*" style="display: none;" />
+          </div>
+          <div class="preview-section" id="img-preview" style="display: none;">
+            <img id="img-thumbnail" alt="Image preview" />
+            <div class="preview-info">
+              <div id="img-filename"></div>
+              <div id="img-resolution"></div>
+              <div id="img-format-display"></div>
+              <div id="img-filesize-display"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label>Output format:</label>
+          <select id="img-format">
+            <option value="ico">ICO (Windows Icon)</option>
+            <option value="icns">ICNS (macOS Icon - converts to PNG)</option>
+            <option value="jpeg">JPEG</option>
+            <option value="png">PNG</option>
+            <option value="webp">WebP</option>
+            <option value="bmp">BMP</option>
+          </select>
+          <label>Size:</label>
+          <select id="img-size">
+            <!-- Options populated dynamically by JavaScript -->
+          </select>
+        </div>
+        <div class="row">
+          <label>Target file size:</label>
+          <select id="img-filesize" style="min-width: 200px;">
+            <!-- Options populated dynamically by JavaScript -->
+          </select>
+        </div>
+        <div class="row">
+          <label>Output folder:</label>
+          <input id="img-outdir" type="text" placeholder="Select destination folder" readonly />
+          <button id="btn-browse-img-folder" type="button">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+              <path fill="currentColor" d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+            </svg>
+            Browse
+          </button>
+        </div>
+        <div class="row">
+          <label>Output name (no ext):</label><input id="img-out" type="text" placeholder="output" />
+        </div>
+
+        <h4 class="effects-title">Image Effects</h4>
+        <div class="row">
+          <label>Mirror:</label>
+          <select id="img-mirror">
+            <option value="none" selected>None</option>
+            <option value="hflip">Horizontal</option>
+            <option value="vflip">Vertical</option>
+          </select>
+
+          <label>Rotate:</label>
+          <select id="img-rotate">
+            <option value="0" selected>None</option>
+            <option value="90">90°</option>
+            <option value="180">180°</option>
+            <option value="270">270°</option>
+          </select>
+        </div>
+
+        <div class="download-container">
+          <button id="btn-convert-img">
+            <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+            Convert Image
+          </button>
+          <div class="circuit-loader" id="convert-img-spinner">
+            <div class="circuit"></div>
+          </div>
+        </div>
+        <pre id="img-log"></pre>
+      </div>
+  </section>
+
+  <section id="watermark" class="view">
+    <div class="tool-section">
+      <h3 class="section-title">
+        <svg class="section-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M19,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M19,19H5V5H19V19M13.96,12.29L11.21,15.83L9.25,13.47L6.5,17H17.5L13.96,12.29Z"/>
+        </svg>
+        Watermark Tools
+      </h3>
+      <div class="file-preview-container">
+      <div class="file-upload-area" onclick="document.getElementById('wm-file').click()">
+        <div class="upload-icon">📁</div>
+        <div class="upload-text">
+          <strong>Choose a source file or drag and drop here</strong><br>
+          <small>Supports video and image files • or click to choose file</small>
+        </div>
+        <input id="wm-file" type="file" accept="video/*,image/*" style="display: none;" />
+      </div>
+      <div class="preview-section" id="wm-source-preview" style="display: none;">
+        <img id="wm-source-thumbnail" alt="Source preview" />
+        <div class="preview-info">
+          <div id="wm-source-filename"></div>
+          <div id="wm-source-resolution"></div>
+          <div id="wm-source-filesize"></div>
+        </div>
+      </div>
+    </div>
+    <div class="watermark-type-selector">
+      <label><input type="radio" name="wm-type" value="image" checked> Image Watermark</label>
+      <label><input type="radio" name="wm-type" value="text"> Text Watermark</label>
+    </div>
+
+    <!-- Image Watermark Controls -->
+    <div id="wm-image-controls" class="wm-controls">
+      <div class="file-preview-container">
+        <div class="file-upload-area" onclick="document.getElementById('wm-img-file').click()">
+          <div class="upload-icon">🖼️</div>
+          <div class="upload-text">
+            <strong>Choose a watermark image or drag and drop here</strong><br>
+            <small>Supports PNG, JPG, and other image formats • or click to choose file</small>
+          </div>
+          <input id="wm-img-file" type="file" accept="image/*" style="display: none;" />
+        </div>
+        <div class="preview-section" id="wm-img-preview" style="display: none;">
+          <img id="wm-img-thumbnail" alt="Watermark preview" />
+          <div class="preview-info">
+            <div id="wm-img-filename"></div>
+            <div id="wm-img-resolution"></div>
+            <div id="wm-img-filesize"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text Watermark Controls -->
+    <div id="wm-text-controls" class="wm-controls" style="display:none;">
+      <div class="row">
+        <label>Text:</label>
+        <input id="wm-text" type="text" placeholder="© Your Name" />
+        <label>Font size:</label>
+        <input id="wm-fontsize" type="number" value="24" min="10" max="100" />
+      </div>
+    </div>
+
+    <!-- Common Watermark Controls -->
+    <div class="row">
+      <label>Position:</label>
+      <select id="wm-position">
+        <option value="top-left">Top Left</option>
+        <option value="top-center">Top Center</option>
+        <option value="top-right">Top Right</option>
+        <option value="center-left">Center Left</option>
+        <option value="center">Center</option>
+        <option value="center-right">Center Right</option>
+        <option value="bottom-left">Bottom Left</option>
+        <option value="bottom-center">Bottom Center</option>
+        <option value="bottom-right" selected>Bottom Right</option>
+      </select>
+      <label>Opacity:</label>
+      <input id="wm-opacity" type="range" min="0" max="100" value="70" />
+      <span id="wm-opacity-value">70%</span>
+    </div>
+    <div class="row">
+      <label>Output folder:</label>
+      <input id="wm-outdir" type="text" placeholder="Select destination folder" readonly />
+      <button id="btn-browse-wm-folder" type="button">
+        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16">
+          <path fill="currentColor" d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+        </svg>
+        Browse
+      </button>
+    </div>
+    <div class="download-container">
+      <button id="btn-apply-watermark">
+        <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18">
+          <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+        Apply Watermark
+      </button>
+      <div class="circuit-loader" id="watermark-spinner">
+        <div class="circuit"></div>
+      </div>
+    </div>
+    <pre id="wm-log"></pre>
+    </div>
+  </section>
+
+  <section id="customization" class="view">
+    <div class="tool-section">
+      <h3 class="section-title">
+        <svg class="section-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11.03L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11.03C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+        </svg>
+        Theme Settings
+      </h3>
+      <div class="row">
+        <label for="theme-toggle">Theme:</label>
+        <div class="theme-toggle-container">
+          <span class="theme-label">Dark</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="theme-label">Light</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <script src="renderer.js"></script>
+  <!-- Toast notifications -->
+  <div id="toast-container"></div>
+</body>
+</html>

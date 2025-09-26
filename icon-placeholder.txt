@@ -1,0 +1,20 @@
+# Icon Files Needed
+
+For Windows (.ico) and macOS (.icns) builds, create these icon files:
+
+1. icon.ico - Windows icon (16x16, 32x32, 48x48, 256x256 sizes)
+2. icon.icns - macOS icon (16x16 to 1024x1024 sizes)
+
+Use the JubaGif logo design:
+- Dark background (#0b1020)
+- Green smiley face (#22c55e)
+- Two dots for eyes, curved line for smile
+
+Online tools to create icons:
+- https://icoconvert.com/ (ICO)
+- https://iconverticons.com/online/ (ICNS)
+- https://www.iconfinder.com/icon-maker (both formats)
+
+Save as:
+- C:\Users\jubah\Documents\JubaGif\icon.ico
+- C:\Users\jubah\Documents\JubaGif\icon.icns
