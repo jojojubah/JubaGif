@@ -88,3 +88,10 @@ JubaGif/
 **Converter:**
 - Short trims, FPS 10/15/24, width 360/480/720
 - Compare GIF quality vs direct one-pass (our preset should look better, smaller)
+## Releases
+- Build per platform when you are ready to ship:
+  - On Windows: `npm run build:win` (outputs to `dist/`)
+  - On macOS: `npm run build:mac` or `npm run build:mac-universal`
+- Collect the generated installers from `dist/`; do not commit them.
+- Draft a GitHub release at https://github.com/jojojubah/JubaGif/releases/new, attach the Windows `.exe` and macOS `.dmg`/`.app`, and publish it.
+- Point users to the latest release downloads via https://github.com/jojojubah/JubaGif/releases/latest.
