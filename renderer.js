@@ -76,8 +76,12 @@ try {
 } catch (e) {
   console.error('yt-dlp-wrap failed:', e);
   // Fallback to local binaries with hybrid approach
-  ytdlpPath = isWindows ? 'yt-dlp-downloads.exe' : 'yt-dlp-downloads'; // Old version for downloads
-  ytdlpFetchPath = isWindows ? 'yt-dlp-fetch.exe' : 'yt-dlp-fetch'; // New version for fast fetch
+  // Use absolute paths that work in both development and packaged apps
+  const appPath = process.resourcesPath || __dirname;
+  const binDir = process.resourcesPath ? path.join(process.resourcesPath, 'app') : __dirname;
+
+  ytdlpPath = path.join(binDir, isWindows ? 'yt-dlp-downloads.exe' : 'yt-dlp-downloads');
+  ytdlpFetchPath = path.join(binDir, isWindows ? 'yt-dlp-fetch.exe' : 'yt-dlp-fetch');
 }
 
 // Debug: Log the resolved paths
