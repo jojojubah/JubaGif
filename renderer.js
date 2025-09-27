@@ -104,6 +104,9 @@ function buildYtDlpArgs(url, fmt, quality, outdir) {
   //  - For MP3: use extract-audio pipeline
   const args = [url];
 
+  // Add FFmpeg location for audio extraction
+  args.push("--ffmpeg-location", ffmpegPath);
+
   // Output template (put inside chosen folder)
   if (outdir && outdir.trim()) {
     args.push("-o", path.join(outdir, "%(title)s.%(ext)s"));

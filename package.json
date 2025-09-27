@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . JubaGif --platform=win32 --arch=x64 --out=dist --overwrite",
-    "build:win": "electron-packager . JubaGif --platform=win32 --arch=x64 --icon=icon.ico --out=dist --overwrite",
+    "build:win": "electron-packager . JubaGif --platform=win32 --arch=x64 --icon=icon.ico --out=dist --overwrite && npm run copy-binaries",
+    "copy-binaries": "node copy-binaries.js",
     "build:mac": "electron-packager . JubaGif --platform=darwin --arch=arm64 --icon=icon.icns --out=dist --overwrite",
     "build:mac-universal": "electron-packager . JubaGif --platform=darwin --arch=x64,arm64 --icon=icon.icns --out=dist --overwrite",
     "build:all": "npm run build:win && npm run build:mac"
