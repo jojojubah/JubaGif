@@ -64,8 +64,12 @@ filesToCopy.forEach(file => {
       process.exit(1);
     }
   } else {
-    console.error(`❌ Source file not found: ${file}`);
-    process.exit(1);
+    console.warn(`⚠️  Source file not found: ${file}`);
+    console.warn(`   Please download the appropriate yt-dlp binary for ${process.platform}`);
+    if (isDarwin) {
+      console.warn(`   Run: curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos -o ${file}`);
+      console.warn(`   Then: chmod +x ${file}`);
+    }
   }
 });
 
