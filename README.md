@@ -1,5 +1,8 @@
 # JubaGif — YouTube Downloader + Video to GIF Converter
 
+on first run Mac/Windows may warn because the app isn’t code-signed yet, it’s safe, just not signed.) 
+Enjoy ;)
+
 ## What it is
 A desktop app that (1) downloads YouTube videos with **smart format/quality selection** using yt-dlp, and (2) converts local videos with **high-quality GIF** support using ffmpeg's palette workflow.
 
