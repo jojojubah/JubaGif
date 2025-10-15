@@ -4,7 +4,7 @@ on first run Mac/Windows may warn because the app isn’t code-signed yet, it’
 Enjoy ;)
 
 ## What it is
-A desktop app that (1) downloads YouTube videos with **smart format/quality selection** using yt-dlp, and (2) converts local videos with **high-quality GIF** support using ffmpeg's palette workflow.
+A desktop app that (1) downloads YouTube videos with **smart format/quality selection** using yt-dlp, and (2) converts local videos/images with **high-quality GIF** support using ffmpeg's palette workflow. (3) Add custom watermark to any video/image.
 
 ## Why
 - Private offline processing
@@ -63,7 +63,7 @@ JubaGif/
 5. Click Download
 
 ### Converter Tab
-1. Select a local video file
+1. Select a local video/image file
 2. Set start/end times for trimming (optional)
 3. Adjust FPS and width as needed
 4. Choose output format (GIF uses HQ palette, MP4/WebM for video)
