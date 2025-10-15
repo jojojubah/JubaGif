@@ -1,4 +1,4 @@
-# JubaGif — YouTube Downloader + Video to GIF Converter
+# JubaGif — YouTube Downloader + Video to GIF Converter + Watermak Tool
 
 on first run Mac/Windows may warn because the app isn’t code-signed yet, it’s safe, just not signed.) 
 Enjoy ;)
